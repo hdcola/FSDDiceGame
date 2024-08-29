@@ -64,5 +64,11 @@ def hold():
     return render_template('game_form.html', players=players)
 
 
+@app.route('/exit', methods=['GET'])
+def exit():
+    session.pop('players', None)
+    return render_template('player_form.html', form=forms.StartForm())
+
+
 if __name__ == '__main__':
     app.run()
