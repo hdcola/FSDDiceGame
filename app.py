@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
-from flask import request, url_for, redirect
+from flask import request, session
 from flask_wtf.csrf import CSRFProtect
 from utils import forms
 import os
@@ -22,10 +22,22 @@ def index():
 def start():
     form = forms.StartForm(request.form)
     if form.validate_on_submit():
-        return redirect(url_for('index'))
+        players = {
+            'player1': form.player1.data,
+            'player1_score': 0,
+            'player2': form.player2.data,
+            'player2_score': 0
+        }
+        session['players'] = players
+        return render_template('game_form.html', players=players)
     else:
-        print(form.errors)
         return render_template('player_form.html', form=form)
+
+
+@app.route('/game', methods=['GET'])
+def game():
+    players = session.get('players')
+    return render_template('game.html', players=players)
 
 
 if __name__ == '__main__':

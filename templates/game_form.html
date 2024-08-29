@@ -1,0 +1,23 @@
+{% block content %}
+<div class="card mx-auto w-1/2 mt-6 p-2 shadow-xl">
+    <h1 class="text-3xl text-center">Who's the Glutton?</h1>
+    <div class="w-full flex flex-row">
+        <div class="w-1/2">
+            <p class="mt-4 text-center">
+                <strong>{{ players.player1 }}</strong>
+            </p>
+            <p class="mt-4 text-center">
+                <strong>{{ players.player1_score }}</strong>
+            </p>
+        </div>
+        <div class="w-1/2">
+            <p class="mt-4 text-center">
+                <strong>{{ players.player2 }}</strong>
+            </p>
+            <p class="mt-4 text-center">
+                <strong>{{ players.player2_score }}</strong>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
