@@ -43,6 +43,12 @@ def game():
     return render_template('game.html', players=players)
 
 
+@app.route('/winner', methods=['GET'])
+def winner():
+    players = session.get('players')
+    return render_template('winner.html', players=players)
+
+
 @app.route('/roll', methods=['GET'])
 def roll():
     players = session.get('players')
@@ -54,6 +60,8 @@ def roll():
     else:
         players[players['current_player'] + '_score'] += players['dice']
     session['players'] = players
+    if players[players['current_player'] + '_score'] >= 20:
+        return render_template('winner.html', players=players)
     return render_template('game_form.html', players=players)
 
 
