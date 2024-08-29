@@ -75,10 +75,13 @@ def roll():
 @app.route('/hold', methods=['GET'])
 def hold():
     players = session.get('players')
+    players[players['current_player'] + '_score'] += players['current_score']
     if players['current_player'] == 'player1':
         players['current_player'] = 'player2'
     else:
         players['current_player'] = 'player1'
+    players['current_score'] = 0
+    players['round_scores'] = ''
     session['players'] = players
     return render_template('game_form.html', players=players)
 
