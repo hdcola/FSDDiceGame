@@ -4,6 +4,7 @@ from flask import request, session
 from flask_wtf.csrf import CSRFProtect
 from utils import forms
 import os
+import random
 
 load_dotenv()
 
@@ -27,7 +28,8 @@ def start():
             'player1_score': 0,
             'player2': form.player2.data,
             'player2_score': 0,
-            'current_player': 'player1'
+            'current_player': 'player1',
+            'dice': 5
         }
         session['players'] = players
         return render_template('game_form.html', players=players)
@@ -39,6 +41,27 @@ def start():
 def game():
     players = session.get('players')
     return render_template('game.html', players=players)
+
+
+@app.route('/roll', methods=['GET'])
+def roll():
+    players = session.get('players')
+    #  randomize the dice
+    players['dice'] = random.randint(1, 6)
+    players[players['current_player'] + '_score'] += players['dice']
+    session['players'] = players
+    return render_template('game_form.html', players=players)
+
+
+@app.route('/hold', methods=['GET'])
+def hold():
+    players = session.get('players')
+    if players['current_player'] == 'player1':
+        players['current_player'] = 'player2'
+    else:
+        players['current_player'] = 'player1'
+    session['players'] = players
+    return render_template('game_form.html', players=players)
 
 
 if __name__ == '__main__':
