@@ -1,0 +1,29 @@
+{% block content %}
+<div class="card mx-auto w-1/2 mt-6 p-2 shadow-xl">
+    <h1 class="text-3xl text-center">Welcome to Who's the Glutton?</h1>
+    <p class="mt-4 text-center">
+        Don't give your opponents a chance. Let's be the bravest zombies around.
+    </p>
+
+    <form hx-post="/start" hx-target="#app" class="w-4/5 m-4 mx-auto">
+        <div id="player_form" class="flex flex-col justify-center gap-2 mx-auto">
+            {{ form.hidden_tag() }}
+            <label class="input input-bordered flex items-center gap-2">
+                Warrior 1
+                <input type="text" name="player1" class="grow" placeholder="Player 1 Name" />
+                {% if form.player1 %}
+                <div class="text-red-500">{{ form.player1.errors[0] }}</div>
+                {% endif %}
+            </label>
+            <label class="input input-bordered flex items-center gap-2">
+                Warrior 2
+                <input type="text" name="player2" class="grow" placeholder="Player 2 Name" />
+                {% if form.player2 %}
+                <div class="text-red-500">{{ form.player2.errors[0] }}</div>
+                {% endif %}
+            </label>
+            <button type="submit" class="btn btn-primary">Start Game</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

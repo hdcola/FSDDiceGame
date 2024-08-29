@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who's a glutton?</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+          .content-auto {
+            content-visibility: auto;
+          }
+        }
+    </style>
+  <script src="https://unpkg.com/htmx.org@2.0.2/dist/htmx.js"
+    integrity="sha384-yZq+5izaUBKcRgFbxgkRYwpHhHHCpp5nseXp0MEQ1A4MTWVMnqkmcuFez8x5qfxr"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class="font-sans w-full" id="app">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+    htmx.logger = function (elt, event, data) {
+      if (console) {
+        console.log(event, elt, data);
+      }
+    }
+  </script>
+</body>
+
+</html>
