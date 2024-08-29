@@ -4,19 +4,48 @@
     <div class="w-full flex flex-row">
         <div class="w-1/2">
             <p class="mt-4 text-center">
-                <strong>{{ players.player1 }}</strong>
+                <strong>Player 1: {{ players.player1 }}</strong>
             </p>
-            <p class="mt-4 text-center">
-                <strong>{{ players.player1_score }}</strong>
+            <p class="mt-4 text-center text-red-500">
+                <strong>Score: {{ players.player1_score }}</strong>
             </p>
         </div>
         <div class="w-1/2">
             <p class="mt-4 text-center">
-                <strong>{{ players.player2 }}</strong>
+                <strong>Player 2: {{ players.player2 }}</strong>
             </p>
-            <p class="mt-4 text-center">
-                <strong>{{ players.player2_score }}</strong>
+            <p class="mt-4 text-center text-red-500">
+                <strong>Score: {{ players.player2_score }}</strong>
             </p>
+        </div>
+    </div>
+    <div class="w-full flex flex-col gap-5">
+        <p class="mt-4 text-center text-red-500">
+            <strong> {{ players.get(players.current_player) }}'s Turn</strong>
+        </p>
+
+        <!-- static dice1.svg -->
+        <div class="w-full flex flex-row justify-center">
+            <img src="/static/dice1.svg" alt="dice1" class="w-1/4">
+        </div>
+
+        <div class="w-full flex flex-row justify-center gap-4">
+            <div class="w-1/4">
+                <form action="" method="post">
+                    <input type="hidden" name="player" value="{{ players.current_player }}">
+                    <input type="hidden" name="score" value="1">
+                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit">ROLL</button>
+                </form>
+            </div>
+            <div class="w-1/4 mb-6">
+                <form action="/game" method="post">
+                    <input type="hidden" name="player" value="{{ players.current_player }}">
+                    <input type="hidden" name="score" value="2">
+                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        type="submit">HOLD</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

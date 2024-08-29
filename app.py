@@ -26,7 +26,8 @@ def start():
             'player1': form.player1.data,
             'player1_score': 0,
             'player2': form.player2.data,
-            'player2_score': 0
+            'player2_score': 0,
+            'current_player': 'player1'
         }
         session['players'] = players
         return render_template('game_form.html', players=players)
