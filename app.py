@@ -29,6 +29,8 @@ def start():
             'player2': form.player2.data,
             'player2_score': 0,
             'current_player': 'player1',
+            'current_score': 0,
+            'round_scores': '',
             'dice': 5
         }
         session['players'] = players
@@ -54,13 +56,18 @@ def roll():
     players = session.get('players')
     #  randomize the dice
     players['dice'] = random.randint(1, 6)
+    players['current_score'] += players['dice']
+    players['round_scores'] += ' ['+str(players['dice']) + ']'
+
     if players['dice'] == 1:
-        players[players['current_player'] + '_score'] = 0
+        players['current_score'] = 0
+        players['round_scores'] = ''
         players['current_player'] = 'player2' if players['current_player'] == 'player1' else 'player1'
-    else:
-        players[players['current_player'] + '_score'] += players['dice']
+
     session['players'] = players
-    if players[players['current_player'] + '_score'] >= 20:
+    if players[players['current_player'] + '_score'] + players['current_score'] >= 20:
+        players[players['current_player'] +
+                '_score'] += players['current_score']
         return render_template('winner.html', players=players)
     return render_template('game_form.html', players=players)
 
@@ -68,10 +75,13 @@ def roll():
 @app.route('/hold', methods=['GET'])
 def hold():
     players = session.get('players')
+    players[players['current_player'] + '_score'] += players['current_score']
     if players['current_player'] == 'player1':
         players['current_player'] = 'player2'
     else:
         players['current_player'] = 'player1'
+    players['current_score'] = 0
+    players['round_scores'] = ''
     session['players'] = players
     return render_template('game_form.html', players=players)
 
