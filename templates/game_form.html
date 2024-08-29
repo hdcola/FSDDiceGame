@@ -26,10 +26,17 @@
         </div>
     </div>
     <div class="w-full flex flex-col gap-5">
-        <p class="mt-4 text-center text-red-500">
-            <strong> {{ players.get(players.current_player) }}'s Turn</strong>
-        </p>
-
+        <div>
+            <p class="mt-4 text-center text-red-500">
+                <strong> {{ players.get(players.current_player) }}'s Turn</strong>
+            </p>
+            <p class="text-center">
+                <strong> Current Score:{{ players['current_score'] }}</strong>
+            </p>
+            <p class="text-center">
+                <strong> Round Scores:{{ players['round_scores'] }}</strong>
+            </p>
+        </div>
         <!-- static dice1.svg -->
         <div class="w-full flex flex-row justify-center">
             <img src="/static/dice{{ players.dice}}.svg" alt="dice1" class="w-1/4">
