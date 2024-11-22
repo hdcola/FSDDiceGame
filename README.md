@@ -6,7 +6,6 @@ It's a Dice game project for FSD program mini project.
 - Python
 - Flask
 - Server Template
-- 
 
 ## Screenshots
 
